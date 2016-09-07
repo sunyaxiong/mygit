@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import ldap
+from django_auth_ldap.config import LDAPSearch, MemberDNGroupType
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'demo'
+    'demo',
+    'MyTest'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -131,7 +134,64 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
-    'demo',
+# ldap
+
+AUTH_LDAP_SERVER_URI = 'ldap://10.37.144.166:389'
+AUTH_LDAP_BIND_DN = "cn=root"
+AUTH_LDAP_BIND_PASSWORD = "Passw0rd"
+
+AUTH_LDAP_CONNECTION_OPTIONS = {ldap.OPT_REFERRALS: 0}
+
+# 查询用户
+AUTH_LDAP_USER_DN_TEMPLATE = "uid=%(user)s,cn=users,dc=enn,dc=com"
+
+# 查找组
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch("cn=cloud,cn=groups, dc=enn, dc=com",
+                                    ldap.SCOPE_SUBTREE, "(objectClass=groupOfUniqueNames)"
+                                    )
+
+AUTH_LDAP_GROUP_TYPE = MemberDNGroupType(member_attr='uniquemember', name_attr='cn')
+
+# 设置组权限
+AUTH_LDAP_REQUIRE_GROUP = "cn=cloud,cn=groups,dc=enn,dc=com"
+# AUTH_LDAP_DENY_GROUP = "cn=cloud,cn=groups,dc=enn,dc=com"
+
+'''
+# 验证 Django 的 User 的is_staff，is_active，is_superuser
+AUTH_LDAP_USER_FLAGS_BY_GROUP = {
+    "is_staff": "cn=cloud,cn=groups,dc=enn,dc=com",
+    "is_active": "cn=cloud,cn=groups,dc=enn,dc=com",
+    "is_superuser": "cn=cloud,cn=groups,dc=enn,dc=com",
+}
+'''
+
+# 把LDAP中用户条目的属性 映射到 Django 的User
+AUTH_LDAP_USER_ATTR_MAP = {
+    "username": "uid",
+    "password": "userPassword",
+    "first_name": "givenName",
+    "last_name": "sn",
+    "email": "mail",
+}
+AUTH_LDAP_PROFILE_ATTR_MAP = {
+    "mobile": "employeeNumber"
+}
+
+# 当这个值为 True， LDAP的用户条目映射并创建 Django User 的时候，会自动映创建Group
+AUTH_LDAP_MIRROR_GROUPS = True
+# 是否每次都从LDAP 把用户信息 更新到 Django 的User
+AUTH_LDAP_ALWAYS_UPDATE_USER = True
+# 如果为True， LDAPBackend将提供基于LDAP组身份验证的用户属于的组的权限
+AUTH_LDAP_FIND_GROUP_PERMS = True
+# 如果为True，LDAP组成员将使用Django的缓存框架。
+AUTH_LDAP_CACHE_GROUPS = True
+# 缓存时长
+AUTH_LDAP_GROUP_CACHE_TIMEOUT = 1800
+
+AUTH_LDAP_BIND_AS_AUTHENTICATING_USER = True
+
+# 设置使用 LDAPBackend
+AUTHENTICATION_BACKENDS = (
+    'django_auth_ldap.backend.LDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )

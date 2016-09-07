@@ -9,6 +9,43 @@ import datetime
 
 # Create your models here.
 
+from django.db import models
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=30)
+    address = models.CharField(max_length=50)
+    city = models.CharField(max_length=60)
+    state_province = models.CharField(max_length=30)
+    country = models.CharField(max_length=50)
+    website = models.URLField()
+
+    class Meta:
+        ordering = ["-name"]
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.name
+
+class Author(models.Model):
+    salutation = models.CharField(max_length=10)
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    headshot = models.ImageField(upload_to='author_headshots')
+    last_accessed = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.name
+
+class Book(models.Model):
+    name = models.CharField(verbose_name='书名', max_length=50, null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    authors = models.ManyToManyField('Author')
+    publisher = models.ForeignKey(Publisher, null=True, blank=True)
+    publication_date = models.DateTimeField(verbose_name='发布时间', null=True, blank=True)
+
+#class Book(models.Model):
+#    name = models.CharField(verbose_name='书名', max_length=50, null=True, blank=True)
+#    publication_date = models.DateTimeField(verbose_name='发布时间', null=True, blank=True)
+
 
 class UserProfile(models.Model):
 
@@ -67,3 +104,13 @@ class ListInfoLog(models.Model):
     val_to = models.CharField(verbose_name='更新后', max_length=100, null=True, blank=True)
     flag = models.CharField(verbose_name='增删标记', max_length=100, null=True, blank=True)
     action_time = models.DateTimeField(verbose_name='变更时间', null=True, blank=True)
+
+
+class Place(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    address = models.CharField(max_length=80)
+
+class Restaurant(Place):
+    serves_hot_dogs = models.BooleanField()
+    serves_pizza = models.BooleanField()
+    emp_amount = models.IntegerField(verbose_name='员工人数', null=True)

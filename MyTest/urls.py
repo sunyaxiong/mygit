@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.generic import TemplateView
+from views import AboutView, BookListView, MyView, PublisherList, PublisherBookList, AuthorDetailView
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^about/', AboutView.as_view()),
+    url(r'^demo/$', BookListView.as_view()),
+    url(r'^myview/$', MyView.as_view()),
+
+    url(r'^publishers/$', PublisherList.as_view()),
+
+    url(r'^books/([\w-]+)/$', PublisherBookList.as_view()),
+    url(r'^authors/(?P<pk>[0-9]+)/$', AuthorDetailView.as_view(), name='author-detail'),
 ]

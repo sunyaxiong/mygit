@@ -3,22 +3,14 @@
 
 __author__ = 'sunyaxiong'
 
-from PIL import Image
-from io import StringIO
-import requests
+from bs4 import BeautifulSoup
+from urllib2 import urlopen
 import json
 
-'''
-r = requests.get('https://api.github.com/user', auth=('sunyaxiongnn@outlook.com', 'Xinao.com123'))
-print r.status_code
-print r.headers['content-type']
-print r.encoding
-print r.text
-print r.json()
-'''
+html = urlopen("http://www.baidu.com")
+bsObj = BeautifulSoup(html.read())
+print bsObj.title.encode('utf8').decode('utf8')
 
-url = 'https://github.com/login'
-cookies = dict(cookies_are='working')
-r = requests.post(url, auth=('sunyaxiongnn@outlook.com', 'Xinao.com123'), cookies=cookies)
-
-print
+hh = '你好世界'
+print isinstance(hh, object)
+print hh.decode('unicode').encode('utf8')
