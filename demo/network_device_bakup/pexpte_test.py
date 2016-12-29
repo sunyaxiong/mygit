@@ -6,7 +6,6 @@ __author__ = 'sunyaxiong'
 import sys
 import os
 import time
-import pexpect
 import getpass
 
 ip = '10.1.56.254'

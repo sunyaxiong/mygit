@@ -17,7 +17,7 @@ from ansible.executor.playbook_executor import PlaybookExecutor
 import os
 
 
-class DoGoMinix(object):
+class DoGoMixin(object):
     def __init__(self, inventory_file=None, passwords=None, verbosity=0, cb='defaults'):
 
         if passwords is None:
@@ -106,7 +106,7 @@ class DoGoMinix(object):
         pass
 
 
-class DoGoAdHocCLI(DoGoMinix):
+class DoGoAdHocCLI(DoGoMixin):
     def __init__(self, *args, **kwargs):
         """ example:
         adh = DoGoAdHocCLI(inventory_file='/etc/ansible/hosts', verbosity=3, cb='cmdb')
@@ -163,7 +163,7 @@ class DoGoAdHocCLI(DoGoMinix):
                 tqm.cleanup()
 
 
-class DoGoPlaybookCLI(DoGoMinix):
+class DoGoPlaybookCLI(DoGoMixin):
     def __init__(self, *args, **kwargs):
         """ example:
         pb = DoGoPlaybookCLI(inventory_file='/etc/ansible/hosts', verbosity=3)

@@ -3,6 +3,8 @@
 
 # the metaclass will automatically get passed the same argument  #元类自动传递相同参数
 # that you usually pass to `type`
+
+
 def upper_attr(future_class_name, future_class_parents, future_class_attr):
   """
     Return a class object, with the list of its attribute turned 
