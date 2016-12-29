@@ -17,4 +17,4 @@ _amds
 conf/settings_local.py
 *._*
 .cache
-.xml
+*.xml

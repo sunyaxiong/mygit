@@ -107,7 +107,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sync_client.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sync_client.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo/tornado_demo/sync_client.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
@@ -115,6 +115,16 @@
               <folding>
                 <element signature="e#46#59#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -190,10 +200,10 @@
         <option value="$PROJECT_DIR$/demo/tornado_demo/http_auth.py" />
         <option value="$PROJECT_DIR$/demo/tornado_demo/http_test.py" />
         <option value="$PROJECT_DIR$/demo/tornado_demo/tcp_client.py" />
-        <option value="$PROJECT_DIR$/demo/tornado_demo/sync_client.py" />
         <option value="$PROJECT_DIR$/demo/tornado_demo/sync_sleep_client.py" />
         <option value="$PROJECT_DIR$/demo/tornado_demo/tcp_server.py" />
         <option value="$PROJECT_DIR$/demo/tornado_demo/async_client.py" />
+        <option value="$PROJECT_DIR$/demo/tornado_demo/sync_client.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
@@ -1160,14 +1170,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/demo/tornado_demo/sync_client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1175,6 +1177,14 @@
           <folding>
             <element signature="e#46#59#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
