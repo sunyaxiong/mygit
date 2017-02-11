@@ -30,8 +30,8 @@ if __name__ == "__main__":
     print ("waiting for conn .....")
 
     while True:
-        sock, addr = sk.accept()
-        t = threading.Thread(target=tcplink, args=(sock, addr))
+        sock, addr = sk.accept()  # 准备传递给线程
+        t = threading.Thread(target=tcplink, args=(sock, addr))  # Thread接受func和args
         t.start()
 
 
