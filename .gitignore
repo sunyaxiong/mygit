@@ -18,3 +18,4 @@ conf/settings_local.py
 *._*
 .cache
 *.xml
+workspace.xml
